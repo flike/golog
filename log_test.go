@@ -49,11 +49,11 @@ func TestRotatingFileLog(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	logger = New(h, Lfile|Ltime|Llevel)
-	logger.SetLevel(LevelTrace)
+	GlobalLogger = New(h, Lfile|Ltime|Llevel)
+	GlobalLogger.SetLevel(LevelTrace)
 	Debug("log", "hello,world", "OK", 0, "fileName", fileName, "fileName2", fileName, "fileName3", fileName)
 
-	logger.Close()
+	GlobalLogger.Close()
 
 	//os.RemoveAll(path)
 }

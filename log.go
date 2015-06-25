@@ -213,7 +213,7 @@ func GetLevel() int {
 }
 
 //全局变量
-var logger *Logger = StdLogger()
+var GlobalLogger *Logger = StdLogger()
 
 func escape(s string, filterEqual bool) string {
 	dest := make([]byte, 0, 2*len(s))
@@ -237,7 +237,7 @@ func escape(s string, filterEqual bool) string {
 }
 
 func output(level int, module string, method string, msg string, reqId int64, args ...interface{}) {
-	if level < logger.Level() {
+	if level < GlobalLogger.Level() {
 		return
 	}
 
@@ -256,7 +256,7 @@ func output(level int, module string, method string, msg string, reqId int64, ar
 	content := fmt.Sprintf(`[%s] "%s" "%s" "%s" req_id=%d`,
 		module, method, msg, argsBuff.String(), reqId)
 
-	logger.Output(3, level, content)
+	GlobalLogger.Output(3, level, content)
 }
 
 //func Init(strLevel string, path string) error {
